@@ -1,6 +1,7 @@
-import { Module } from '@nestjs/common';
+import { MiddlewareConsumer, Module, NestModule, RequestMethod } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import  AuctioneerModule  from './auctioneers/auctioneer.module';
+import { LoggerMiddleware } from './logger.middleware';
 
 @Module({
   imports: [
@@ -11,4 +12,10 @@ import  AuctioneerModule  from './auctioneers/auctioneer.module';
     AuctioneerModule
   ],
 })
-export class AppModule {}
+export class AppModule implements NestModule {
+  configure(consumer: MiddlewareConsumer) {
+    consumer
+      .apply(LoggerMiddleware)  
+      .forRoutes({path:'/*',method:RequestMethod.ALL});
+  }
+}
