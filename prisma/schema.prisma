@@ -15,7 +15,7 @@ datasource db {
 }
 
 model Auctioneer{
-  id    Int @default(autoincrement()) @id
+  id    String @default(uuid()) @id
   email String 
   name  String
   url   String[]

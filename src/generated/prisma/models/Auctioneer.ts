@@ -20,28 +20,18 @@ export type AuctioneerModel = runtime.Types.Result.DefaultSelection<Prisma.$Auct
 
 export type AggregateAuctioneer = {
   _count: AuctioneerCountAggregateOutputType | null
-  _avg: AuctioneerAvgAggregateOutputType | null
-  _sum: AuctioneerSumAggregateOutputType | null
   _min: AuctioneerMinAggregateOutputType | null
   _max: AuctioneerMaxAggregateOutputType | null
 }
 
-export type AuctioneerAvgAggregateOutputType = {
-  id: number | null
-}
-
-export type AuctioneerSumAggregateOutputType = {
-  id: number | null
-}
-
 export type AuctioneerMinAggregateOutputType = {
-  id: number | null
+  id: string | null
   email: string | null
   name: string | null
 }
 
 export type AuctioneerMaxAggregateOutputType = {
-  id: number | null
+  id: string | null
   email: string | null
   name: string | null
 }
@@ -54,14 +44,6 @@ export type AuctioneerCountAggregateOutputType = {
   _all: number
 }
 
-
-export type AuctioneerAvgAggregateInputType = {
-  id?: true
-}
-
-export type AuctioneerSumAggregateInputType = {
-  id?: true
-}
 
 export type AuctioneerMinAggregateInputType = {
   id?: true
@@ -121,18 +103,6 @@ export type AuctioneerAggregateArgs<ExtArgs extends runtime.Types.Extensions.Int
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
    * 
-   * Select which fields to average
-  **/
-  _avg?: AuctioneerAvgAggregateInputType
-  /**
-   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-   * 
-   * Select which fields to sum
-  **/
-  _sum?: AuctioneerSumAggregateInputType
-  /**
-   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-   * 
    * Select which fields to find the minimum value
   **/
   _min?: AuctioneerMinAggregateInputType
@@ -163,20 +133,16 @@ export type AuctioneerGroupByArgs<ExtArgs extends runtime.Types.Extensions.Inter
   take?: number
   skip?: number
   _count?: AuctioneerCountAggregateInputType | true
-  _avg?: AuctioneerAvgAggregateInputType
-  _sum?: AuctioneerSumAggregateInputType
   _min?: AuctioneerMinAggregateInputType
   _max?: AuctioneerMaxAggregateInputType
 }
 
 export type AuctioneerGroupByOutputType = {
-  id: number
+  id: string
   email: string
   name: string
   url: string[]
   _count: AuctioneerCountAggregateOutputType | null
-  _avg: AuctioneerAvgAggregateOutputType | null
-  _sum: AuctioneerSumAggregateOutputType | null
   _min: AuctioneerMinAggregateOutputType | null
   _max: AuctioneerMaxAggregateOutputType | null
 }
@@ -200,7 +166,7 @@ export type AuctioneerWhereInput = {
   AND?: Prisma.AuctioneerWhereInput | Prisma.AuctioneerWhereInput[]
   OR?: Prisma.AuctioneerWhereInput[]
   NOT?: Prisma.AuctioneerWhereInput | Prisma.AuctioneerWhereInput[]
-  id?: Prisma.IntFilter<"Auctioneer"> | number
+  id?: Prisma.StringFilter<"Auctioneer"> | string
   email?: Prisma.StringFilter<"Auctioneer"> | string
   name?: Prisma.StringFilter<"Auctioneer"> | string
   url?: Prisma.StringNullableListFilter<"Auctioneer">
@@ -214,7 +180,7 @@ export type AuctioneerOrderByWithRelationInput = {
 }
 
 export type AuctioneerWhereUniqueInput = Prisma.AtLeast<{
-  id?: number
+  id?: string
   AND?: Prisma.AuctioneerWhereInput | Prisma.AuctioneerWhereInput[]
   OR?: Prisma.AuctioneerWhereInput[]
   NOT?: Prisma.AuctioneerWhereInput | Prisma.AuctioneerWhereInput[]
@@ -229,63 +195,64 @@ export type AuctioneerOrderByWithAggregationInput = {
   name?: Prisma.SortOrder
   url?: Prisma.SortOrder
   _count?: Prisma.AuctioneerCountOrderByAggregateInput
-  _avg?: Prisma.AuctioneerAvgOrderByAggregateInput
   _max?: Prisma.AuctioneerMaxOrderByAggregateInput
   _min?: Prisma.AuctioneerMinOrderByAggregateInput
-  _sum?: Prisma.AuctioneerSumOrderByAggregateInput
 }
 
 export type AuctioneerScalarWhereWithAggregatesInput = {
   AND?: Prisma.AuctioneerScalarWhereWithAggregatesInput | Prisma.AuctioneerScalarWhereWithAggregatesInput[]
   OR?: Prisma.AuctioneerScalarWhereWithAggregatesInput[]
   NOT?: Prisma.AuctioneerScalarWhereWithAggregatesInput | Prisma.AuctioneerScalarWhereWithAggregatesInput[]
-  id?: Prisma.IntWithAggregatesFilter<"Auctioneer"> | number
+  id?: Prisma.StringWithAggregatesFilter<"Auctioneer"> | string
   email?: Prisma.StringWithAggregatesFilter<"Auctioneer"> | string
   name?: Prisma.StringWithAggregatesFilter<"Auctioneer"> | string
   url?: Prisma.StringNullableListFilter<"Auctioneer">
 }
 
 export type AuctioneerCreateInput = {
+  id?: string
   email: string
   name: string
   url?: Prisma.AuctioneerCreateurlInput | string[]
 }
 
 export type AuctioneerUncheckedCreateInput = {
-  id?: number
+  id?: string
   email: string
   name: string
   url?: Prisma.AuctioneerCreateurlInput | string[]
 }
 
 export type AuctioneerUpdateInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   url?: Prisma.AuctioneerUpdateurlInput | string[]
 }
 
 export type AuctioneerUncheckedUpdateInput = {
-  id?: Prisma.IntFieldUpdateOperationsInput | number
+  id?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   url?: Prisma.AuctioneerUpdateurlInput | string[]
 }
 
 export type AuctioneerCreateManyInput = {
-  id?: number
+  id?: string
   email: string
   name: string
   url?: Prisma.AuctioneerCreateurlInput | string[]
 }
 
 export type AuctioneerUpdateManyMutationInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   url?: Prisma.AuctioneerUpdateurlInput | string[]
 }
 
 export type AuctioneerUncheckedUpdateManyInput = {
-  id?: Prisma.IntFieldUpdateOperationsInput | number
+  id?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   url?: Prisma.AuctioneerUpdateurlInput | string[]
@@ -306,10 +273,6 @@ export type AuctioneerCountOrderByAggregateInput = {
   url?: Prisma.SortOrder
 }
 
-export type AuctioneerAvgOrderByAggregateInput = {
-  id?: Prisma.SortOrder
-}
-
 export type AuctioneerMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   email?: Prisma.SortOrder
@@ -320,10 +283,6 @@ export type AuctioneerMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   email?: Prisma.SortOrder
   name?: Prisma.SortOrder
-}
-
-export type AuctioneerSumOrderByAggregateInput = {
-  id?: Prisma.SortOrder
 }
 
 export type AuctioneerCreateurlInput = {
@@ -337,14 +296,6 @@ export type StringFieldUpdateOperationsInput = {
 export type AuctioneerUpdateurlInput = {
   set?: string[]
   push?: string | string[]
-}
-
-export type IntFieldUpdateOperationsInput = {
-  set?: number
-  increment?: number
-  decrement?: number
-  multiply?: number
-  divide?: number
 }
 
 
@@ -383,7 +334,7 @@ export type $AuctioneerPayload<ExtArgs extends runtime.Types.Extensions.Internal
   name: "Auctioneer"
   objects: {}
   scalars: runtime.Types.Extensions.GetPayloadResult<{
-    id: number
+    id: string
     email: string
     name: string
     url: string[]
@@ -810,7 +761,7 @@ export interface Prisma__AuctioneerClient<T, Null = never, ExtArgs extends runti
  * Fields of the Auctioneer model
  */
 export interface AuctioneerFieldRefs {
-  readonly id: Prisma.FieldRef<"Auctioneer", 'Int'>
+  readonly id: Prisma.FieldRef<"Auctioneer", 'String'>
   readonly email: Prisma.FieldRef<"Auctioneer", 'String'>
   readonly name: Prisma.FieldRef<"Auctioneer", 'String'>
   readonly url: Prisma.FieldRef<"Auctioneer", 'String[]'>
