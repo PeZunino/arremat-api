@@ -1,10 +1,14 @@
 import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
+import { ConfigModule } from '@nestjs/config';
+import  AuctioneerModule  from './auctioneers/auctioneer.module';
 
 @Module({
-  imports: [],
-  controllers: [AppController],
-  providers: [AppService],
+  imports: [
+    ConfigModule.forRoot({
+      isGlobal:true,
+      skipProcessEnv:true,
+    }),
+    AuctioneerModule
+  ],
 })
 export class AppModule {}
