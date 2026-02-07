@@ -1,7 +1,6 @@
 import { Injectable } from "@nestjs/common";
-import { PrismaService } from "src/prisma.service";
-import CreateAuctioneerDTO from "./dto/createAuctioneerDTO";
 import { Prisma } from "src/generated/prisma/client";
+import { PrismaService } from "src/prisma.service";
 
 @Injectable()
 export default class AuctioneerService{
