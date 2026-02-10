@@ -74,7 +74,9 @@ export const AuctioneerScalarFieldEnum = {
   id: 'id',
   email: 'email',
   name: 'name',
-  url: 'url'
+  phones: 'phones',
+  url: 'url',
+  division: 'division'
 } as const
 
 export type AuctioneerScalarFieldEnum = (typeof AuctioneerScalarFieldEnum)[keyof typeof AuctioneerScalarFieldEnum]

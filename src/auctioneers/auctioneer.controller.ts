@@ -11,7 +11,7 @@ export class AuctioneerController{
 
   @Post()
   async createAuctioneer(@Body(new ValidationPipe()) createAuctioneerDTO: CreateAuctioneerDTO){
-    return await this.auctioneerSerive.create({email:createAuctioneerDTO.email,name:createAuctioneerDTO.name,url:createAuctioneerDTO.url});
+    return await this.auctioneerSerive.create(createAuctioneerDTO);
   }
     
   @Get(':id')

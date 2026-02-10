@@ -16,7 +16,9 @@ datasource db {
 
 model Auctioneer{
   id    String @default(uuid()) @id
-  email String 
+  email String[] 
   name  String
+  phones String[]
   url   String[]
+  division String[]
 }

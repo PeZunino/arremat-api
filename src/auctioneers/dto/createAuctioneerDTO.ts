@@ -5,10 +5,19 @@ export default class CreateAuctioneerDTO {
   @IsString()
   name: string;
 
-  @IsString()
-  email: string;
+  @IsArray()
+  @IsString({ each: true })
+  email: string[];
+
+  @IsArray()
+  @IsString({ each: true })
+  phones: string[];
 
   @IsArray()
   @IsString({ each: true })
   url: string[];
+
+  @IsArray()
+  @IsString({ each: true })
+  division: string[]
 }

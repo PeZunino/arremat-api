@@ -26,13 +26,11 @@ export type AggregateAuctioneer = {
 
 export type AuctioneerMinAggregateOutputType = {
   id: string | null
-  email: string | null
   name: string | null
 }
 
 export type AuctioneerMaxAggregateOutputType = {
   id: string | null
-  email: string | null
   name: string | null
 }
 
@@ -40,20 +38,20 @@ export type AuctioneerCountAggregateOutputType = {
   id: number
   email: number
   name: number
+  phones: number
   url: number
+  division: number
   _all: number
 }
 
 
 export type AuctioneerMinAggregateInputType = {
   id?: true
-  email?: true
   name?: true
 }
 
 export type AuctioneerMaxAggregateInputType = {
   id?: true
-  email?: true
   name?: true
 }
 
@@ -61,7 +59,9 @@ export type AuctioneerCountAggregateInputType = {
   id?: true
   email?: true
   name?: true
+  phones?: true
   url?: true
+  division?: true
   _all?: true
 }
 
@@ -139,9 +139,11 @@ export type AuctioneerGroupByArgs<ExtArgs extends runtime.Types.Extensions.Inter
 
 export type AuctioneerGroupByOutputType = {
   id: string
-  email: string
+  email: string[]
   name: string
+  phones: string[]
   url: string[]
+  division: string[]
   _count: AuctioneerCountAggregateOutputType | null
   _min: AuctioneerMinAggregateOutputType | null
   _max: AuctioneerMaxAggregateOutputType | null
@@ -167,16 +169,20 @@ export type AuctioneerWhereInput = {
   OR?: Prisma.AuctioneerWhereInput[]
   NOT?: Prisma.AuctioneerWhereInput | Prisma.AuctioneerWhereInput[]
   id?: Prisma.StringFilter<"Auctioneer"> | string
-  email?: Prisma.StringFilter<"Auctioneer"> | string
+  email?: Prisma.StringNullableListFilter<"Auctioneer">
   name?: Prisma.StringFilter<"Auctioneer"> | string
+  phones?: Prisma.StringNullableListFilter<"Auctioneer">
   url?: Prisma.StringNullableListFilter<"Auctioneer">
+  division?: Prisma.StringNullableListFilter<"Auctioneer">
 }
 
 export type AuctioneerOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   email?: Prisma.SortOrder
   name?: Prisma.SortOrder
+  phones?: Prisma.SortOrder
   url?: Prisma.SortOrder
+  division?: Prisma.SortOrder
 }
 
 export type AuctioneerWhereUniqueInput = Prisma.AtLeast<{
@@ -184,16 +190,20 @@ export type AuctioneerWhereUniqueInput = Prisma.AtLeast<{
   AND?: Prisma.AuctioneerWhereInput | Prisma.AuctioneerWhereInput[]
   OR?: Prisma.AuctioneerWhereInput[]
   NOT?: Prisma.AuctioneerWhereInput | Prisma.AuctioneerWhereInput[]
-  email?: Prisma.StringFilter<"Auctioneer"> | string
+  email?: Prisma.StringNullableListFilter<"Auctioneer">
   name?: Prisma.StringFilter<"Auctioneer"> | string
+  phones?: Prisma.StringNullableListFilter<"Auctioneer">
   url?: Prisma.StringNullableListFilter<"Auctioneer">
+  division?: Prisma.StringNullableListFilter<"Auctioneer">
 }, "id">
 
 export type AuctioneerOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   email?: Prisma.SortOrder
   name?: Prisma.SortOrder
+  phones?: Prisma.SortOrder
   url?: Prisma.SortOrder
+  division?: Prisma.SortOrder
   _count?: Prisma.AuctioneerCountOrderByAggregateInput
   _max?: Prisma.AuctioneerMaxOrderByAggregateInput
   _min?: Prisma.AuctioneerMinOrderByAggregateInput
@@ -204,58 +214,74 @@ export type AuctioneerScalarWhereWithAggregatesInput = {
   OR?: Prisma.AuctioneerScalarWhereWithAggregatesInput[]
   NOT?: Prisma.AuctioneerScalarWhereWithAggregatesInput | Prisma.AuctioneerScalarWhereWithAggregatesInput[]
   id?: Prisma.StringWithAggregatesFilter<"Auctioneer"> | string
-  email?: Prisma.StringWithAggregatesFilter<"Auctioneer"> | string
+  email?: Prisma.StringNullableListFilter<"Auctioneer">
   name?: Prisma.StringWithAggregatesFilter<"Auctioneer"> | string
+  phones?: Prisma.StringNullableListFilter<"Auctioneer">
   url?: Prisma.StringNullableListFilter<"Auctioneer">
+  division?: Prisma.StringNullableListFilter<"Auctioneer">
 }
 
 export type AuctioneerCreateInput = {
   id?: string
-  email: string
+  email?: Prisma.AuctioneerCreateemailInput | string[]
   name: string
+  phones?: Prisma.AuctioneerCreatephonesInput | string[]
   url?: Prisma.AuctioneerCreateurlInput | string[]
+  division?: Prisma.AuctioneerCreatedivisionInput | string[]
 }
 
 export type AuctioneerUncheckedCreateInput = {
   id?: string
-  email: string
+  email?: Prisma.AuctioneerCreateemailInput | string[]
   name: string
+  phones?: Prisma.AuctioneerCreatephonesInput | string[]
   url?: Prisma.AuctioneerCreateurlInput | string[]
+  division?: Prisma.AuctioneerCreatedivisionInput | string[]
 }
 
 export type AuctioneerUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  email?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.AuctioneerUpdateemailInput | string[]
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  phones?: Prisma.AuctioneerUpdatephonesInput | string[]
   url?: Prisma.AuctioneerUpdateurlInput | string[]
+  division?: Prisma.AuctioneerUpdatedivisionInput | string[]
 }
 
 export type AuctioneerUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  email?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.AuctioneerUpdateemailInput | string[]
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  phones?: Prisma.AuctioneerUpdatephonesInput | string[]
   url?: Prisma.AuctioneerUpdateurlInput | string[]
+  division?: Prisma.AuctioneerUpdatedivisionInput | string[]
 }
 
 export type AuctioneerCreateManyInput = {
   id?: string
-  email: string
+  email?: Prisma.AuctioneerCreateemailInput | string[]
   name: string
+  phones?: Prisma.AuctioneerCreatephonesInput | string[]
   url?: Prisma.AuctioneerCreateurlInput | string[]
+  division?: Prisma.AuctioneerCreatedivisionInput | string[]
 }
 
 export type AuctioneerUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  email?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.AuctioneerUpdateemailInput | string[]
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  phones?: Prisma.AuctioneerUpdatephonesInput | string[]
   url?: Prisma.AuctioneerUpdateurlInput | string[]
+  division?: Prisma.AuctioneerUpdatedivisionInput | string[]
 }
 
 export type AuctioneerUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  email?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.AuctioneerUpdateemailInput | string[]
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  phones?: Prisma.AuctioneerUpdatephonesInput | string[]
   url?: Prisma.AuctioneerUpdateurlInput | string[]
+  division?: Prisma.AuctioneerUpdatedivisionInput | string[]
 }
 
 export type StringNullableListFilter<$PrismaModel = never> = {
@@ -270,22 +296,34 @@ export type AuctioneerCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   email?: Prisma.SortOrder
   name?: Prisma.SortOrder
+  phones?: Prisma.SortOrder
   url?: Prisma.SortOrder
+  division?: Prisma.SortOrder
 }
 
 export type AuctioneerMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  email?: Prisma.SortOrder
   name?: Prisma.SortOrder
 }
 
 export type AuctioneerMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  email?: Prisma.SortOrder
   name?: Prisma.SortOrder
 }
 
+export type AuctioneerCreateemailInput = {
+  set: string[]
+}
+
+export type AuctioneerCreatephonesInput = {
+  set: string[]
+}
+
 export type AuctioneerCreateurlInput = {
+  set: string[]
+}
+
+export type AuctioneerCreatedivisionInput = {
   set: string[]
 }
 
@@ -293,7 +331,22 @@ export type StringFieldUpdateOperationsInput = {
   set?: string
 }
 
+export type AuctioneerUpdateemailInput = {
+  set?: string[]
+  push?: string | string[]
+}
+
+export type AuctioneerUpdatephonesInput = {
+  set?: string[]
+  push?: string | string[]
+}
+
 export type AuctioneerUpdateurlInput = {
+  set?: string[]
+  push?: string | string[]
+}
+
+export type AuctioneerUpdatedivisionInput = {
   set?: string[]
   push?: string | string[]
 }
@@ -304,40 +357,50 @@ export type AuctioneerSelect<ExtArgs extends runtime.Types.Extensions.InternalAr
   id?: boolean
   email?: boolean
   name?: boolean
+  phones?: boolean
   url?: boolean
+  division?: boolean
 }, ExtArgs["result"]["auctioneer"]>
 
 export type AuctioneerSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   email?: boolean
   name?: boolean
+  phones?: boolean
   url?: boolean
+  division?: boolean
 }, ExtArgs["result"]["auctioneer"]>
 
 export type AuctioneerSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   email?: boolean
   name?: boolean
+  phones?: boolean
   url?: boolean
+  division?: boolean
 }, ExtArgs["result"]["auctioneer"]>
 
 export type AuctioneerSelectScalar = {
   id?: boolean
   email?: boolean
   name?: boolean
+  phones?: boolean
   url?: boolean
+  division?: boolean
 }
 
-export type AuctioneerOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "email" | "name" | "url", ExtArgs["result"]["auctioneer"]>
+export type AuctioneerOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "email" | "name" | "phones" | "url" | "division", ExtArgs["result"]["auctioneer"]>
 
 export type $AuctioneerPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "Auctioneer"
   objects: {}
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
-    email: string
+    email: string[]
     name: string
+    phones: string[]
     url: string[]
+    division: string[]
   }, ExtArgs["result"]["auctioneer"]>
   composites: {}
 }
@@ -762,9 +825,11 @@ export interface Prisma__AuctioneerClient<T, Null = never, ExtArgs extends runti
  */
 export interface AuctioneerFieldRefs {
   readonly id: Prisma.FieldRef<"Auctioneer", 'String'>
-  readonly email: Prisma.FieldRef<"Auctioneer", 'String'>
+  readonly email: Prisma.FieldRef<"Auctioneer", 'String[]'>
   readonly name: Prisma.FieldRef<"Auctioneer", 'String'>
+  readonly phones: Prisma.FieldRef<"Auctioneer", 'String[]'>
   readonly url: Prisma.FieldRef<"Auctioneer", 'String[]'>
+  readonly division: Prisma.FieldRef<"Auctioneer", 'String[]'>
 }
     
 
