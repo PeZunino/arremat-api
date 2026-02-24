@@ -42,3 +42,23 @@ export { Prisma }
  * 
  */
 export type Auctioneer = Prisma.AuctioneerModel
+/**
+ * Model AuctionRound
+ * 
+ */
+export type AuctionRound = Prisma.AuctionRoundModel
+/**
+ * Model Legal
+ * 
+ */
+export type Legal = Prisma.LegalModel
+/**
+ * Model AuctionDetail
+ * 
+ */
+export type AuctionDetail = Prisma.AuctionDetailModel
+/**
+ * Model Auction
+ * 
+ */
+export type Auction = Prisma.AuctionModel

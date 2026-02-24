@@ -51,7 +51,11 @@ export const AnyNull = runtime.AnyNull
 
 
 export const ModelName = {
-  Auctioneer: 'Auctioneer'
+  Auctioneer: 'Auctioneer',
+  AuctionRound: 'AuctionRound',
+  Legal: 'Legal',
+  AuctionDetail: 'AuctionDetail',
+  Auction: 'Auction'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -80,6 +84,57 @@ export const AuctioneerScalarFieldEnum = {
 } as const
 
 export type AuctioneerScalarFieldEnum = (typeof AuctioneerScalarFieldEnum)[keyof typeof AuctioneerScalarFieldEnum]
+
+
+export const AuctionRoundScalarFieldEnum = {
+  id: 'id',
+  date: 'date',
+  value: 'value',
+  auctionId: 'auctionId'
+} as const
+
+export type AuctionRoundScalarFieldEnum = (typeof AuctionRoundScalarFieldEnum)[keyof typeof AuctionRoundScalarFieldEnum]
+
+
+export const LegalScalarFieldEnum = {
+  id: 'id',
+  caseNumber: 'caseNumber',
+  plaintiff: 'plaintiff',
+  defendant: 'defendant',
+  auctionId: 'auctionId'
+} as const
+
+export type LegalScalarFieldEnum = (typeof LegalScalarFieldEnum)[keyof typeof LegalScalarFieldEnum]
+
+
+export const AuctionDetailScalarFieldEnum = {
+  id: 'id',
+  description: 'description',
+  status: 'status',
+  auctionId: 'auctionId'
+} as const
+
+export type AuctionDetailScalarFieldEnum = (typeof AuctionDetailScalarFieldEnum)[keyof typeof AuctionDetailScalarFieldEnum]
+
+
+export const AuctionScalarFieldEnum = {
+  id: 'id',
+  url: 'url',
+  title: 'title',
+  city: 'city',
+  stat: 'stat',
+  seller: 'seller',
+  auctioneer: 'auctioneer',
+  initialValue: 'initialValue',
+  openDate: 'openDate',
+  closeDate: 'closeDate',
+  lastBid: 'lastBid',
+  category: 'category',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type AuctionScalarFieldEnum = (typeof AuctionScalarFieldEnum)[keyof typeof AuctionScalarFieldEnum]
 
 
 export const SortOrder = {

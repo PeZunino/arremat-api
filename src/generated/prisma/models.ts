@@ -9,4 +9,8 @@
  * 🟢 You can import this file directly.
  */
 export type * from './models/Auctioneer.js'
+export type * from './models/AuctionRound.js'
+export type * from './models/Legal.js'
+export type * from './models/AuctionDetail.js'
+export type * from './models/Auction.js'
 export type * from './commonInputTypes.js'

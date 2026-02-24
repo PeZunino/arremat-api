@@ -22,3 +22,60 @@ model Auctioneer{
   url   String[]
   division String[]
 }
+
+enum Vehicle {
+  Car
+  Motorcycle
+  Default
+}
+
+model AuctionRound {
+  id        String   @id @default(uuid())
+  date      DateTime
+  value     String
+
+  auction   Auction  @relation(fields: [auctionId], references: [id])
+  auctionId String
+}
+
+model Legal {
+  id         String   @id @default(uuid())
+  caseNumber String
+  plaintiff  String
+  defendant  String
+
+  auction    Auction  @relation(fields: [auctionId], references: [id])
+  auctionId  String   @unique
+}
+
+model AuctionDetail {
+  id          String   @id @default(uuid())
+  description String
+  status      String[]
+
+  auctionId String @unique
+  auction   Auction @relation(fields: [auctionId], references: [id])
+}
+
+model Auction {
+  id            String   @id @default(uuid())
+  url           String
+  title         String
+  city          String
+  stat          String
+  seller        String
+  auctioneer    String
+  initialValue  Float
+  openDate      DateTime
+  closeDate     DateTime
+  lastBid       Float
+  category      Vehicle
+
+  // RELAÇÕES
+  rounds        AuctionRound[]
+  legal         Legal?
+  details       AuctionDetail?
+
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+}
