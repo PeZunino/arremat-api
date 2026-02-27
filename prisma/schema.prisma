@@ -48,34 +48,100 @@ model Legal {
   auctionId  String   @unique
 }
 
-model AuctionDetail {
-  id          String   @id @default(uuid())
-  description String
-  status      String[]
-
-  auctionId String @unique
-  auction   Auction @relation(fields: [auctionId], references: [id])
-}
 
 model Auction {
   id            String   @id @default(uuid())
   url           String
   title         String
   city          String
-  stat          String
+  state         String
   seller        String
   auctioneer    String
   initialValue  Float
   openDate      DateTime
   closeDate     DateTime
   lastBid       Float
-  category      Vehicle
+  category      AuctionCategory  
 
-  // RELAÇÕES
   rounds        AuctionRound[]
   legal         Legal?
-  details       AuctionDetail?
+  vehicleDetail VehicleDetail?   
+  propertyDetail PropertyDetail? 
 
   createdAt     DateTime @default(now())
   updatedAt     DateTime @updatedAt
+}
+
+enum AuctionCategory {
+  Car
+  Motorcycle
+  Apartment
+  House
+  Land
+  CommercialProperty
+  Default
+}
+
+model VehicleDetail {
+  id                String   @id @default(uuid())
+  
+  brand             String?  
+  model             String?  
+  yearManufacture   String?  
+  yearModel         String?  
+  uf                String?  
+  plate             String?  
+  chassis           String?  
+  renavam           String?  
+  engineNumber      String?  
+  
+  mileage           String?  
+  fuel              String?  
+  color             String?  
+  transmission      String?  
+  doors             Int?     
+  armored           Boolean? 
+  
+  engine            String?  
+  gearbox           String?  
+  steering          String?  
+  paint             String?  
+  bodywork          String?  
+  upholstery        String?  
+  tires             String?  
+  electrical        String?  
+  mechanics         String?  
+
+  conservationState String?  
+  working           Boolean? 
+
+  accessories       Json?    
+
+  description       String?
+
+  inspectionAddress String?  
+
+  auction           Auction  @relation(fields: [auctionId], references: [id])
+  auctionId         String   @unique
+}
+
+model PropertyDetail {
+  id                String   @id @default(uuid())
+  type              String?  
+  area              String?  
+  privatArea        String?  
+  landArea          String?  
+  bedrooms          Int?
+  bathrooms         Int?
+  parkingSpots      Int?
+  floor             String?  
+  registry          String?  
+  registration      String?  
+  conservationState String?
+  occupied          Boolean? 
+  description       String?
+  amenities         String[] 
+
+  auction           Auction  @relation(fields: [auctionId], references: [id])
+  auctionId         String   @unique
 }
