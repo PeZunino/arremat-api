@@ -38,17 +38,6 @@ model AuctionRound {
   auctionId String
 }
 
-model Legal {
-  id         String   @id @default(uuid())
-  caseNumber String
-  plaintiff  String
-  defendant  String
-
-  auction    Auction  @relation(fields: [auctionId], references: [id])
-  auctionId  String   @unique
-}
-
-
 model Auction {
   id            String   @id @default(uuid())
   url           String
@@ -61,27 +50,20 @@ model Auction {
   openDate      DateTime
   closeDate     DateTime
   lastBid       Float
-  category      AuctionCategory  
+  category      Vehicle  
 
   rounds        AuctionRound[]
-  legal         Legal?
+  
+  caseNumber String
+  plaintiff  String
+  defendant  String
+
   vehicleDetail VehicleDetail?   
   propertyDetail PropertyDetail? 
 
   createdAt     DateTime @default(now())
   updatedAt     DateTime @updatedAt
 }
-
-enum AuctionCategory {
-  Car
-  Motorcycle
-  Apartment
-  House
-  Land
-  CommercialProperty
-  Default
-}
-
 model VehicleDetail {
   id                String   @id @default(uuid())
   
