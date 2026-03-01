@@ -14,6 +14,23 @@ datasource db {
   provider = "postgresql"
 }
 
+model User {
+  id        String   @id @default(uuid())
+  name      String
+  email     String   @unique
+  password  String
+  role      Role     @default(USER)
+  active    Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("user")
+}
+
+enum Role {
+  USER
+  ADMIN
+}
 model Auctioneer{
   id    String @default(uuid()) @id
   email String[] 
@@ -21,6 +38,8 @@ model Auctioneer{
   phones String[]
   url   String[]
   division String[]
+
+  @@map("auctioneer")
 }
 
 enum Vehicle {
@@ -36,6 +55,8 @@ model AuctionRound {
 
   auction   Auction  @relation(fields: [auctionId], references: [id])
   auctionId String
+
+  @@map("auction_round")
 }
 
 model Auction {
@@ -63,6 +84,8 @@ model Auction {
 
   createdAt     DateTime @default(now())
   updatedAt     DateTime @updatedAt
+
+  @@map("auction")
 }
 model VehicleDetail {
   id                String   @id @default(uuid())
@@ -105,6 +128,8 @@ model VehicleDetail {
 
   auction           Auction  @relation(fields: [auctionId], references: [id])
   auctionId         String   @unique
+
+  @@map("vehicle_detail")
 }
 
 model PropertyDetail {
@@ -126,4 +151,6 @@ model PropertyDetail {
 
   auction           Auction  @relation(fields: [auctionId], references: [id])
   auctionId         String   @unique
+
+  @@map("property_detail")
 }
