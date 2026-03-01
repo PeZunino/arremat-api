@@ -12,12 +12,7 @@ import {
   IsString,
   ValidateNested,
 } from 'class-validator';
-
-export enum AuctionCategory {
-  Car = 'Car',
-  Motorcycle = 'Motorcycle',
-  Default = 'Default',
-}
+import { Vehicle } from 'src/generated/prisma/enums';
 
 class AuctionRoundDTO {
   @IsDate()
@@ -90,7 +85,7 @@ class PropertyDetailDTO {
   @IsOptional() @IsArray() @IsString({ each: true }) amenities?: string[];
 }
 
-export default class CreateAuctionDTO {
+export class CreateAuctionDTO {
   @IsString()
   url: string;
 
@@ -123,8 +118,8 @@ export default class CreateAuctionDTO {
   @IsNumber()
   lastBid: number;
 
-  @IsEnum(AuctionCategory)
-  category: AuctionCategory;
+  @IsEnum(Vehicle)
+  category: Vehicle;
 
   @IsArray()
   @ValidateNested({ each: true })
