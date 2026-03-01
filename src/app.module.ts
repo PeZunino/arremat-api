@@ -12,6 +12,7 @@ import { UsersModule } from './users/users.module';
 import AuctionModule from './auction/auction.module';
 import { APP_GUARD } from '@nestjs/core';
 import { JwtAuthGuard } from './auth/guards/auth-jwt.guard';
+import { ThrottlerGuard, ThrottlerModule } from '@nestjs/throttler';
 
 @Module({
   imports: [
@@ -19,6 +20,23 @@ import { JwtAuthGuard } from './auth/guards/auth-jwt.guard';
       isGlobal: true,
       envFilePath: '.env',
     }),
+    ThrottlerModule.forRoot([
+      {
+        name: 'short',
+        ttl: 1000,
+        limit: 3,
+      },
+      {
+        name: 'medium',
+        ttl: 10000,
+        limit: 20,
+      },
+      {
+        name: 'long',
+        ttl: 60000,
+        limit: 100,
+      },
+    ]),
     AuctioneerModule,
     AuctionModule,
     AuthModule,
@@ -28,6 +46,11 @@ import { JwtAuthGuard } from './auth/guards/auth-jwt.guard';
     {
       provide: APP_GUARD,
       useClass: JwtAuthGuard,
+    },
+
+    {
+      provide: APP_GUARD,
+      useClass: ThrottlerGuard,
     },
   ],
 })

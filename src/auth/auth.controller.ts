@@ -14,6 +14,7 @@ import { CreateUserDto } from 'src/users/createUserDTO';
 import { AllowAnon } from './decorators/allow-anon.decorator';
 import { CurrentUser } from './decorators/current-user.decorator';
 import type { JwtPayload } from './jwt.payload';
+import { SkipThrottle } from '@nestjs/throttler';
 
 const COOKIE_OPTIONS = {
   httpOnly: true,
@@ -22,6 +23,7 @@ const COOKIE_OPTIONS = {
   maxAge: 60 * 60 * 24 * 7, // 7 dias
 };
 
+@SkipThrottle()
 @Controller('/auth')
 export class AuthController {
   constructor(private readonly authService: AuthService) {}
