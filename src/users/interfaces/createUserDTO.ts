@@ -1,23 +1,25 @@
+// src/users/dto/create-user.dto.ts
 import {
   IsEmail,
   IsString,
-  IsStrongPassword,
   IsOptional,
+  MinLength,
   IsEnum,
 } from 'class-validator';
-import { Role } from 'src/generated/prisma/enums';
+import { Role } from './Role.enum';
 
-export class CreateUserDto {
+export class CreateUserDTO {
   @IsString()
   name: string;
 
   @IsEmail()
   email: string;
 
-  @IsStrongPassword()
+  @IsString()
+  @MinLength(6)
   password: string;
 
-  @IsEnum(Role)
   @IsOptional()
+  @IsEnum(Role)
   role?: Role;
 }

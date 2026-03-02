@@ -8,13 +8,16 @@ import {
   Res,
   UnauthorizedException,
 } from '@nestjs/common';
-import type { FastifyRequest, FastifyReply } from 'fastify';
-import { AuthService } from './auth.service';
-import { CreateUserDto } from 'src/users/createUserDTO';
+import { FastifyRequest, FastifyReply } from 'fastify';
 import { AllowAnon } from './decorators/allow-anon.decorator';
 import { CurrentUser } from './decorators/current-user.decorator';
-import type { JwtPayload } from './jwt.payload';
+import { JwtPayload } from './jwt.payload';
 import { SkipThrottle } from '@nestjs/throttler';
+import UpdateRefreshTokenService from './services/UpdateRefreshToken.service';
+import LogoutService from './services/Logout.service';
+import RegisterUserService from './services/Register.service';
+import { CreateUserDTO } from 'src/users/interfaces/createUserDTO';
+import SignInService from './services/SignIn.service';
 
 const COOKIE_OPTIONS = {
   httpOnly: true,
@@ -26,7 +29,12 @@ const COOKIE_OPTIONS = {
 @SkipThrottle()
 @Controller('/auth')
 export class AuthController {
-  constructor(private readonly authService: AuthService) {}
+  constructor(
+    private readonly logoutService: LogoutService,
+    private readonly registerUserService: RegisterUserService,
+    private readonly signinService: SignInService,
+    private readonly updateRefreshTokenService: UpdateRefreshTokenService,
+  ) {}
 
   @AllowAnon()
   @HttpCode(HttpStatus.OK)
@@ -35,7 +43,7 @@ export class AuthController {
     @Body() dto: { email: string; password: string },
     @Res({ passthrough: true }) res: FastifyReply,
   ) {
-    const { accessToken, refreshToken } = await this.authService.signIn(
+    const { accessToken, refreshToken } = await this.signinService.execute(
       dto.email,
       dto.password,
     );
@@ -48,10 +56,11 @@ export class AuthController {
   @AllowAnon()
   @Post('register')
   async register(
-    @Body() dto: CreateUserDto,
+    @Body() dto: CreateUserDTO,
     @Res({ passthrough: true }) res: FastifyReply,
   ) {
-    const { accessToken, refreshToken } = await this.authService.register(dto);
+    const { accessToken, refreshToken } =
+      await this.registerUserService.execute(dto);
 
     res.setCookie('refreshToken', refreshToken, COOKIE_OPTIONS);
 
@@ -69,7 +78,7 @@ export class AuthController {
     if (!refreshToken) throw new UnauthorizedException();
 
     const { accessToken, refreshToken: newRefreshToken } =
-      await this.authService.refreshWithToken(refreshToken);
+      await this.updateRefreshTokenService.execute(refreshToken);
 
     res.setCookie('refreshToken', newRefreshToken, COOKIE_OPTIONS);
 
@@ -81,7 +90,7 @@ export class AuthController {
     @CurrentUser() user: JwtPayload,
     @Res({ passthrough: true }) res: FastifyReply,
   ) {
-    await this.authService.logout(user.sub);
+    await this.logoutService.execute(user.sub);
     res.clearCookie('refreshToken', { path: '/auth/refresh' });
   }
 }

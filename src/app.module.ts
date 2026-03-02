@@ -13,6 +13,7 @@ import AuctionModule from './auction/auction.module';
 import { APP_GUARD } from '@nestjs/core';
 import { JwtAuthGuard } from './auth/guards/auth-jwt.guard';
 import { ThrottlerGuard, ThrottlerModule } from '@nestjs/throttler';
+import { PrismaModule } from './prisma/prisma.module';
 
 @Module({
   imports: [
@@ -41,6 +42,7 @@ import { ThrottlerGuard, ThrottlerModule } from '@nestjs/throttler';
     AuctionModule,
     AuthModule,
     UsersModule,
+    PrismaModule,
   ],
   providers: [
     {
