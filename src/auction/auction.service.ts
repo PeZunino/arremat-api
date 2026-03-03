@@ -1,5 +1,5 @@
 import { Prisma } from 'src/generated/prisma/client';
-import { PrismaService } from 'src/prisma.service';
+import { PrismaService } from 'src/prisma/prisma.service';
 import { Injectable } from '@nestjs/common';
 import { CreateAuctionDTO } from './createAuctionDTO';
 
@@ -47,7 +47,6 @@ export class AuctionService {
             // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
             create: Object.fromEntries(
               Object.entries(dto.vehicleDetail).filter(
-                // eslint-disable-next-line @typescript-eslint/no-unused-vars
                 ([_, v]) => v !== undefined,
               ),
             ) as any,

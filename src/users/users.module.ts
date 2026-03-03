@@ -1,11 +1,20 @@
 import { Module } from '@nestjs/common';
-import { UsersService } from './users.service';
 import { CryptoModule } from 'src/crypto/crypto.module';
-import { PrismaService } from 'src/prisma.service';
+import { UserPrismaRepository } from './repositories/user.prisma.repository';
+import { USER_REPOSITORY } from './repositories/user.repository.interface';
+import { CreateUserService } from './services/CreateUser.service';
+import { UpdateRefreshTokenService } from './services/UpdateRefreshToken.service';
 
 @Module({
-  providers: [UsersService, PrismaService],
-  exports: [UsersService],
+  providers: [
+    UpdateRefreshTokenService,
+    CreateUserService,
+    {
+      provide: USER_REPOSITORY,
+      useClass: UserPrismaRepository,
+    },
+  ],
+  exports: [UpdateRefreshTokenService, CreateUserService, USER_REPOSITORY],
   imports: [CryptoModule],
 })
 export class UsersModule {}
