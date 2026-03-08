@@ -13,11 +13,11 @@ import { AllowAnon } from './decorators/allow-anon.decorator';
 import { CurrentUser } from './decorators/current-user.decorator';
 import { JwtPayload } from './jwt.payload';
 import { SkipThrottle } from '@nestjs/throttler';
-import UpdateRefreshTokenService from './services/UpdateRefreshToken.service';
-import LogoutService from './services/Logout.service';
-import RegisterUserService from './services/Register.service';
+import UpdateRefreshTokenService from './services/authUpdateRefreshToken.service';
+import LogoutService from './services/authLogout.service';
+import RegisterUserService from './services/authRegister.service';
 import { CreateUserDTO } from 'src/users/interfaces/createUserDTO';
-import SignInService from './services/SignIn.service';
+import SignInService from './services/authSignIn.service';
 
 const COOKIE_OPTIONS = {
   httpOnly: true,
@@ -43,6 +43,7 @@ export class AuthController {
     @Body() dto: { email: string; password: string },
     @Res({ passthrough: true }) res: FastifyReply,
   ) {
+    console.log('here');
     const { accessToken, refreshToken } = await this.signinService.execute(
       dto.email,
       dto.password,
@@ -59,9 +60,11 @@ export class AuthController {
     @Body() dto: CreateUserDTO,
     @Res({ passthrough: true }) res: FastifyReply,
   ) {
-    const { accessToken, refreshToken } =
-      await this.registerUserService.execute(dto);
-
+    const { email, password } = await this.registerUserService.execute(dto);
+    const { accessToken, refreshToken } = await this.signinService.execute(
+      email,
+      password,
+    );
     res.setCookie('refreshToken', refreshToken, COOKIE_OPTIONS);
 
     return { accessToken };
