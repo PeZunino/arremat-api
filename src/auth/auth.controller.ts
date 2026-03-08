@@ -13,11 +13,11 @@ import { AllowAnon } from './decorators/allow-anon.decorator';
 import { CurrentUser } from './decorators/current-user.decorator';
 import { JwtPayload } from './jwt.payload';
 import { SkipThrottle } from '@nestjs/throttler';
-import UpdateRefreshTokenService from './services/authUpdateRefreshToken.service';
-import LogoutService from './services/authLogout.service';
-import RegisterUserService from './services/authRegister.service';
 import { CreateUserDTO } from 'src/users/interfaces/createUserDTO';
-import SignInService from './services/authSignIn.service';
+import AuthLogoutService from './services/AuthLogout.service';
+import AuthRegisterUserService from './services/AuthRegister.service';
+import AuthSignInService from './services/AuthSignIn.service';
+import AuthUpdateRefreshTokenService from './services/AuthUpdateRefreshToken.service';
 
 const COOKIE_OPTIONS = {
   httpOnly: true,
@@ -30,10 +30,10 @@ const COOKIE_OPTIONS = {
 @Controller('/auth')
 export class AuthController {
   constructor(
-    private readonly logoutService: LogoutService,
-    private readonly registerUserService: RegisterUserService,
-    private readonly signinService: SignInService,
-    private readonly updateRefreshTokenService: UpdateRefreshTokenService,
+    private readonly logoutService: AuthLogoutService,
+    private readonly registerUserService: AuthRegisterUserService,
+    private readonly signinService: AuthSignInService,
+    private readonly updateRefreshTokenService: AuthUpdateRefreshTokenService,
   ) {}
 
   @AllowAnon()

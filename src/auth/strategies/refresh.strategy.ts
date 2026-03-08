@@ -6,7 +6,10 @@ import { JwtPayload } from '../jwt.payload';
 import { IncomingMessage } from 'http';
 
 @Injectable()
-export class RefreshStrategy extends PassportStrategy(Strategy, 'jwt-refresh') {
+export class AuthRefreshStrategy extends PassportStrategy(
+  Strategy,
+  'jwt-refresh',
+) {
   constructor(config: ConfigService) {
     super({
       jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),

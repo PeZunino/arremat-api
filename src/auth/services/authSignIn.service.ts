@@ -4,10 +4,10 @@ import {
   USER_REPOSITORY,
 } from 'src/users/repositories/user.repository.interface';
 import { CryptoService } from 'src/crypto/crypto.service';
-import GenerateTokenService from './GenerateToken.service';
+import GenerateTokenService from './AuthGenerateToken.service';
 
 @Injectable()
-export default class SignInService {
+export default class AuthSignInService {
   constructor(
     @Inject(USER_REPOSITORY)
     private readonly usersRepository: IUserRepository,

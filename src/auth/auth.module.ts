@@ -4,24 +4,24 @@ import { UsersModule } from 'src/users/users.module';
 import { JwtModule } from '@nestjs/jwt';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { PassportModule } from '@nestjs/passport';
-import { RefreshStrategy } from './strategies/refresh.strategy';
+import { AuthRefreshStrategy } from './strategies/refresh.strategy';
 import { JwtStrategy } from './strategies/jwt.strategy';
 import { CryptoModule } from 'src/crypto/crypto.module';
-import GenerateTokenService from './services/GenerateToken.service';
-import LogoutService from './services/Logout.service';
-import RegisterUserService from './services/Register.service';
-import UpdateRefreshTokenService from './services/UpdateRefreshToken.service';
-import SignInService from './services/SignIn.service';
+import AuthGenerateTokenService from './services/AuthGenerateToken.service';
+import AuthLogoutService from './services/AuthLogout.service';
+import AuthRegisterUserService from './services/AuthRegister.service';
+import AuthUpdateRefreshTokenService from './services/AuthUpdateRefreshToken.service';
+import AuthSignInService from './services/AuthSignIn.service';
 
 @Module({
   controllers: [AuthController],
   providers: [
-    GenerateTokenService,
-    LogoutService,
-    RegisterUserService,
-    SignInService,
-    UpdateRefreshTokenService,
-    RefreshStrategy,
+    AuthGenerateTokenService,
+    AuthLogoutService,
+    AuthRegisterUserService,
+    AuthSignInService,
+    AuthUpdateRefreshTokenService,
+    AuthRefreshStrategy,
     JwtStrategy,
   ],
   imports: [
