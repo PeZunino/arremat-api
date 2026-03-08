@@ -1,11 +1,10 @@
 import { Auctioneer } from '../Auctioneer';
 
-export interface IAuctioneerRepository {
-  findById(id: string): Promise<Auctioneer | null>;
-  get(): Promise<Auctioneer[]>;
-  create(data: Auctioneer): Promise<Auctioneer>;
-  update(data: Partial<Auctioneer>): Promise<Auctioneer>;
-  delete(id: string): Promise<void>;
+export abstract class IAuctioneerRepository {
+  abstract create(auctioneer: Auctioneer): Promise<Auctioneer>;
+  abstract findById(id: string): Promise<Auctioneer | null>;
+  abstract findByEmail(email: string): Promise<Auctioneer | null>;
+  abstract delete(id: string): Promise<void>;
+  abstract update(data: Partial<Auctioneer>): Promise<Auctioneer>;
+  abstract get(): Promise<Auctioneer[]>;
 }
-
-export const AUCTIONEER_REPOSITORY = 'AUCTIONEER_REPOSITORY';

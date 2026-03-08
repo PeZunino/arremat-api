@@ -5,7 +5,7 @@ import CreateAuctioneerService from './services/CreateAuctioneer.service';
 import UpdateAuctioneerService from './services/UpdateAuctioneer.service';
 import DeleteAuctioneerService from './services/DeleteAuctioneer.service';
 import ListAuctioneerService from './services/ListAuctioneer.service';
-import { AUCTIONEER_REPOSITORY } from './repositories/auctioneer.repository.interface';
+import { IAuctioneerRepository } from './repositories/auctioneer.repository.interface';
 import { AuctioneerPrismaRepository } from './repositories/auctioneer.prisma.repository';
 
 @Module({
@@ -17,7 +17,7 @@ import { AuctioneerPrismaRepository } from './repositories/auctioneer.prisma.rep
     ListAuctioneerService,
     PrismaService,
     {
-      provide: AUCTIONEER_REPOSITORY,
+      provide: IAuctioneerRepository,
       useClass: AuctioneerPrismaRepository,
     },
   ],
