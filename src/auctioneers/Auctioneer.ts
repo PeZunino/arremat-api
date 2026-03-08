@@ -1,6 +1,6 @@
-import { Url } from 'url';
-import { Email } from './Email.vo';
-import { Phone } from './Phone.vo';
+import { Url } from 'src/auction/Url.vo';
+import { Email } from './vo/Email.vo';
+import { Phone } from './vo/Phone.vo';
 
 export class Auctioneer {
   private constructor(
