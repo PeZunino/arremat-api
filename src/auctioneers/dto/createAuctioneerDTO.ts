@@ -1,5 +1,4 @@
-
-import { IsString, IsInt, IsArray } from 'class-validator';
+import { IsString, IsArray } from 'class-validator';
 
 export default class CreateAuctioneerDTO {
   @IsString()
@@ -19,5 +18,5 @@ export default class CreateAuctioneerDTO {
 
   @IsArray()
   @IsString({ each: true })
-  division: string[]
+  division: string[];
 }
