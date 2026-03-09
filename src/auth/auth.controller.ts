@@ -8,16 +8,17 @@ import {
   Res,
   UnauthorizedException,
 } from '@nestjs/common';
-import { FastifyRequest, FastifyReply } from 'fastify';
 import { AllowAnon } from './decorators/allow-anon.decorator';
 import { CurrentUser } from './decorators/current-user.decorator';
-import { JwtPayload } from './jwt.payload';
+import type { JwtPayload } from './jwt.payload';
 import { SkipThrottle } from '@nestjs/throttler';
 import { CreateUserDTO } from 'src/users/interfaces/createUserDTO';
 import AuthLogoutService from './services/AuthLogout.service';
 import AuthRegisterUserService from './services/AuthRegister.service';
 import AuthSignInService from './services/AuthSignIn.service';
 import AuthUpdateRefreshTokenService from './services/AuthUpdateRefreshToken.service';
+import type { FastifyRequest } from 'fastify';
+import type { FastifyReply } from 'fastify';
 
 const COOKIE_OPTIONS = {
   httpOnly: true,

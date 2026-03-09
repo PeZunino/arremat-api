@@ -42,7 +42,10 @@ export class AuctioneerController {
     @Param('id', ParseUUIDPipe) id: string,
     @Body() dto: UpdateAuctioneerDTO,
   ) {
-    return await this.updateAuctioneerService.execute(dto);
+    return await this.updateAuctioneerService.execute({
+      id,
+      auctioneer: dto,
+    });
   }
 
   @Delete(':id')

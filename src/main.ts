@@ -8,6 +8,8 @@ import { AppModule } from './app.module';
 import helmet from '@fastify/helmet';
 import fastifyCsrf from '@fastify/csrf-protection';
 import { ValidationPipe } from '@nestjs/common';
+import { DomainExceptionFilter } from './common/exception.filter';
+import { ResultInterceptor } from './common/result.interceptor';
 async function bootstrap() {
   const app = await NestFactory.create<NestFastifyApplication>(
     AppModule,
@@ -22,6 +24,8 @@ async function bootstrap() {
 
   app.enableCors();
   app.useGlobalPipes(new ValidationPipe({ whitelist: true, transform: true }));
+  app.useGlobalFilters(new DomainExceptionFilter());
+  app.useGlobalInterceptors(new ResultInterceptor());
   await app.listen(process.env.PORT ?? 3000, '0.0.0.0');
 }
 bootstrap();
